@@ -1,4 +1,4 @@
-package com.camargo.bullshorn.model;
+package com.camargo.bullshorn.marketdata.model;
 
 import lombok.Data;
 
