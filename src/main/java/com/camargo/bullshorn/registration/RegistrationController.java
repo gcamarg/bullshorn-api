@@ -3,7 +3,6 @@ package com.camargo.bullshorn.registration;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
@@ -16,15 +15,16 @@ public class RegistrationController {
     private RegistrationService registrationService;
 
     @PostMapping
-    public ResponseEntity register(@RequestBody RegistrationRequest request) {
-        if(registrationService.register(request)){
-           return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Object> register(@RequestBody RegistrationRequest request) {
+        String registerResponse = registrationService.register(request);
+        if(registerResponse.equals("success")){
+            return new ResponseEntity<>(registerResponse, HttpStatus.OK);
         }
-        return new ResponseEntity(HttpStatus.EXPECTATION_FAILED);
+        return new ResponseEntity<>(registerResponse, HttpStatus.EXPECTATION_FAILED);
     }
 
     @GetMapping(path = "/confirmation")
-    public String confirm(@RequestParam("token") String token) {
+    public ResponseEntity<String> confirm(@RequestParam("token") String token) {
         return registrationService.confirmToken(token);
     }
 

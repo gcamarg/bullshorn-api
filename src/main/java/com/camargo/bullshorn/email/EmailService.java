@@ -3,6 +3,7 @@ package com.camargo.bullshorn.email;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -16,8 +17,9 @@ import javax.mail.internet.MimeMessage;
 public class EmailService implements EmailSender {
 
     private final JavaMailSender mailSender;
-
     private final static Logger LOGGER = LoggerFactory.getLogger(EmailService.class);
+    @Value("${emailSender.address}")
+    private String emailSender;
 
     @Override
     @Async
@@ -28,7 +30,7 @@ public class EmailService implements EmailSender {
             helper.setText(emailBody, true);
             helper.setTo(to);
             helper.setSubject("Confirm your email.");
-            helper.setFrom("noreply@bullshorn.com");
+            helper.setFrom(emailSender);
             mailSender.send(mimeMessage);
         }catch(MessagingException e){
             LOGGER.error("Failed to send email ", e);

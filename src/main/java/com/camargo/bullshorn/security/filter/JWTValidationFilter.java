@@ -2,6 +2,7 @@ package com.camargo.bullshorn.security.filter;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,9 +19,11 @@ public class JWTValidationFilter extends BasicAuthenticationFilter {
 
     public static final String HEADER_ATTRIBUTE = "Authorization";
     public static final String ATTRIBUTE_BEARER = "Bearer ";
+    private String TOKEN_SECRET;
+    public JWTValidationFilter(AuthenticationManager authenticationManager, String TOKEN_SECRET) {
 
-    public JWTValidationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
+        this.TOKEN_SECRET = TOKEN_SECRET;
     }
 
     @Override
@@ -41,7 +44,7 @@ public class JWTValidationFilter extends BasicAuthenticationFilter {
     }
 
     UsernamePasswordAuthenticationToken getAuthenticationToken(String token){
-        String user = JWT.require(Algorithm.HMAC512(UserAuthenticationFilter.TOKEN_SECRET))
+        String user = JWT.require(Algorithm.HMAC512(TOKEN_SECRET))
                 .build()
                 .verify(token)
                 .getSubject();

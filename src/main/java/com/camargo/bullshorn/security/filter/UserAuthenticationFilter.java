@@ -5,6 +5,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.camargo.bullshorn.appuser.AppUser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -23,9 +24,9 @@ import java.util.Date;
 @AllArgsConstructor
 public class UserAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
-    private static final int TOKEN_EXPIRATION = 900_000;
-    public static final String TOKEN_SECRET = "d0455844-6986-4516-94bc-e1d2afea6264";
     private final AuthenticationManager authenticationManager;
+    public final String TOKEN_SECRET;
+    private final int TOKEN_EXPIRATION;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException {

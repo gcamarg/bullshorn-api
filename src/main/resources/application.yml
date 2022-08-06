@@ -4,15 +4,15 @@ server:
     include-binding-errors: always
 spring:
   datasource:
-    host: localhost
-    port: 5432
-    password: password
-    username: postgres
-    databaseName: registration
+    host: ${database.host}
+    port: ${database.port}
+    password: ${database.password}
+    username: ${database.user}
+    databaseName: ${database.database}
     url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.databaseName}
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
@@ -20,19 +20,23 @@ spring:
     show-sql: true
 
   mail:
-    host: localhost
-    port: 1025
-    username: hello
-    password: hello
-
+    host: smtp.office365.com
+    port: 587
+    username: ${emailSender.address}
+    password: ${emailSender.password}
     properties:
       mail:
         smtp:
-          ssl:
-            trust: "*"
           auth: true
           starttls:
             enable: true
-          connectiontimeout: 5000
-          timeout: 3000
-          writetimeout: 5000
+            required: true
+          ssl:
+            enable: false
+    test-connection: false
+
+jwt:
+  secret: ${token.secret}
+  expiration: ${token.expiration}
+finnhub:
+  token:  ${finnhub.token}

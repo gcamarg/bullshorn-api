@@ -30,10 +30,13 @@ public class AppUserService implements UserDetailsService {
 
     public String singUpUser(AppUser appUser) {
 
-        boolean userExists = appUserRepository.findByUsername(appUser.getEmail()).isPresent();
+        boolean emailExists = appUserRepository.findByEmail(appUser.getEmail()).isPresent();
+        boolean usernameExists = appUserRepository.findByUsername(appUser.getUsername()).isPresent();
 
-        if (userExists) {
+        if (emailExists) {
             throw new IllegalStateException("Email already registered");
+        } else if (usernameExists) {
+            throw new IllegalStateException("Username is not available");
         }
 
         String encodedPassword = bCryptPasswordEncoder.encode(appUser.getPassword());
