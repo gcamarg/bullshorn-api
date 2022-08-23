@@ -40,3 +40,5 @@ jwt:
   expiration: ${token.expiration}
 finnhub:
   token:  ${finnhub.token}
+client:
+  url: ${client.domain}
