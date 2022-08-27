@@ -4,11 +4,11 @@ server:
     include-binding-errors: always
 spring:
   datasource:
-    host: ${database.host}
-    port: ${database.port}
+    host: ec2-44-206-197-71.compute-1.amazonaws.com
+    port: 5432
     password: ${database.password}
     username: ${database.user}
-    databaseName: ${database.database}
+    databaseName: d5hkdocf0mm7oj
     url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.databaseName}
   jpa:
     hibernate:
@@ -37,7 +37,7 @@ spring:
 
 jwt:
   secret: ${token.secret}
-  expiration: ${token.expiration}
+  expiration: 900000
 finnhub:
   token:  ${finnhub.token}
 client:
