@@ -6,8 +6,8 @@ spring:
   datasource:
     host: ec2-44-206-197-71.compute-1.amazonaws.com
     port: 5432
-    password: ${database.password}
-    username: ${database.user}
+    password: ${database_password}
+    username: ${database_user}
     databaseName: d5hkdocf0mm7oj
     url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.databaseName}
   jpa:
@@ -22,8 +22,8 @@ spring:
   mail:
     host: smtp.office365.com
     port: 587
-    username: ${emailSender.address}
-    password: ${emailSender.password}
+    username: ${emailSender_address}
+    password: ${emailSender_password}
     properties:
       mail:
         smtp:
@@ -36,9 +36,9 @@ spring:
     test-connection: false
 
 jwt:
-  secret: ${token.secret}
+  secret: ${token_secret}
   expiration: 900000
 finnhub:
-  token:  ${finnhub.token}
+  token:  ${finnhub_token}
 client:
-  url: ${client.domain}
+  url: ${client_domain}
