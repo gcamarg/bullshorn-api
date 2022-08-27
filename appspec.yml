@@ -1,5 +1,10 @@
 version: 0.0
 os: linux
+
+files:
+  - source: target/bullshorn-0.0.1-SNAPSHOT.jar
+    destination: /home/ec2-user/server
+
 hooks:
   ApplicationStop:
     - location: scripts/stop_service.sh
