@@ -16,11 +16,15 @@ hooks:
     - location: server_clear.sh
       timeout: 300
       runas: ec2-user
+  AfterInstall:
+    - location: fix_privileges.sh
+      timeout: 300
+      runas: ec2-user
   ApplicationStop:
     - location: stop_service.sh
       timeout: 300
-      runas: user
+      runas: ec2-user
   ApplicationStart:
     - location: start_service.sh
       timeout: 300
-      runas: user
+      runas: ec2-user
