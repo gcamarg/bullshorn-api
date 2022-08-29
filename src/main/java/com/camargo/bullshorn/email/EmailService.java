@@ -18,7 +18,7 @@ public class EmailService implements EmailSender {
 
     private final JavaMailSender mailSender;
     private final static Logger LOGGER = LoggerFactory.getLogger(EmailService.class);
-    @Value("${emailSender.address}")
+    @Value("${spring.mail.username}")
     private String emailSender;
 
     @Override

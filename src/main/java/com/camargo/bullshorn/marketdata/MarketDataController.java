@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "https://bullshorn.herokuapp.com")
+@CrossOrigin(origins = "${client_domain}")
 @RestController
 @RequestMapping("/api/v1/marketdata")
 public class MarketDataController {
