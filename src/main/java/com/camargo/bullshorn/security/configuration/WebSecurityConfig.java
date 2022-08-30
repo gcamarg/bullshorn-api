@@ -2,6 +2,7 @@ package com.camargo.bullshorn.security.configuration;
 
 
 import com.camargo.bullshorn.appuser.AppUserService;
+import com.camargo.bullshorn.awsConfig.SecretRetriever;
 import com.camargo.bullshorn.security.filter.JWTValidationFilter;
 import com.camargo.bullshorn.security.filter.UserAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
@@ -60,6 +61,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
         provider.setPasswordEncoder(bCryptPasswordEncoder);
         provider.setUserDetailsService(appUserService);
+
+        SecretRetriever.getSecret();
+
         return provider;
     }
 
