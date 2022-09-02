@@ -1,5 +1,15 @@
 version: 0.2
 
+env:
+  secrets-manager:
+    database_password: prod/bullshorn:database_password
+    database_user: prod/bullshorn:database_user
+    emailSender_address: prod/bullshorn:emailSender_address
+    emailSender_password: prod/bullshorn:emailSender_password
+    token_secret: prod/bullshorn:token_secret
+    finnhub_token: prod/bullshorn:finnhub_token
+    client_domain: prod/bullshorn:client_domain
+
 phases:
   install:
     runtime-versions:
