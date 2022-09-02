@@ -1,16 +1,6 @@
 version: 0.0
 os: linux
 
-env:
-  exported-variables:
-    - database_password
-    - database_user
-    - emailSender_address
-    - emailSender_password
-    - token_secret
-    - finnhub_token
-    - client_domain
-
 files:
   - source: /
     destination: /home/ubuntu/server

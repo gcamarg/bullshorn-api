@@ -1,5 +1,15 @@
 version: 0.2
 
+env:
+  exported-variables:
+    - database_password
+    - database_user
+    - emailSender_address
+    - emailSender_password
+    - token_secret
+    - finnhub_token
+    - client_domain
+
 phases:
   install:
     runtime-versions:

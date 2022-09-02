@@ -9,8 +9,8 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
 public class BullshornApplication {
 
     public static void main(String[] args) {
-        //SpringApplication.run(BullshornApplication.class, args);
-        new SpringApplicationBuilder(BullshornApplication.class).properties(SecretRetriever.getSecret()).run(args);
+        SpringApplication.run(BullshornApplication.class, args);
+        //new SpringApplicationBuilder(BullshornApplication.class).properties(SecretRetriever.getSecret()).run(args);
     }
 
 }
