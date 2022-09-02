@@ -7,7 +7,8 @@ import com.camargo.bullshorn.email.EmailLayout;
 import com.camargo.bullshorn.email.EmailSender;
 import com.camargo.bullshorn.registration.token.ConfirmationToken;
 import com.camargo.bullshorn.registration.token.ConfirmationTokenService;
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,9 +16,11 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class RegistrationService {
 
+    @Value("${client.url}")
+    private java.lang.String CLIENT_URL;
     private final AppUserService appUserService;
     private final EmailValidator emailValidator;
     private final ConfirmationTokenService confirmationTokenService;
@@ -33,14 +36,12 @@ public class RegistrationService {
                             request.getEmail(),
                             request.getPassword(),
                             AppUserRole.USER));
-            String confirmationLink = "https://bullshorn.herokuapp.com/confirm/"+token;
+            String confirmationLink = CLIENT_URL + "/confirm/" + token;
             emailSender.send(request.getEmail(), EmailLayout.buildEmail(request.getUserName(), confirmationLink));
             return "success";
         } catch(IllegalStateException e) {
             return e.getMessage();
         }
-
-
     }
 
     public ResponseEntity<String> confirmToken(String token) {
