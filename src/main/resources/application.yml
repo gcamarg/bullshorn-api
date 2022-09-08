@@ -1,4 +1,12 @@
 server:
+  port: 8443
+  ssl:
+    enable: true
+    key-alias: bullshorn-api-ssl
+    store-type: JKS
+    key-store-password: 7P3asNB15Z3slhsTxlVq5mvj
+    key-password: 7P3asNB15Z3slhsTxlVq5mvj
+    key-store: classpath:bullshorn-api.jks
   error:
     include-message: always
     include-binding-errors: always
@@ -18,7 +26,10 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
     show-sql: true
-
+  data:
+    mongodb:
+      uri: mongodb+srv://${mongodb_user}:${mongodb_password}@retrostoredb.bemxv.mongodb.net/?retryWrites=true&w=majority
+      database: bullshorn-db
   mail:
     host: smtp.office365.com
     port: 587
@@ -37,7 +48,7 @@ spring:
 
 jwt:
   secret: ${token_secret}
-  expiration: 900000
+  expiration: 1200000
 finnhub:
   token:  ${finnhub_token}
 client:

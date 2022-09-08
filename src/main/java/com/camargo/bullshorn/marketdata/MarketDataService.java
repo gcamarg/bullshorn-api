@@ -65,4 +65,19 @@ public class MarketDataService {
         return symbolList;
 
     }
+
+    public List<String> getSymbolSugestion() {
+
+        String uri = "https://finnhub.io/api/v1/stock/symbol?exchange=US&token=" + token;
+        RestTemplate restTemplate = new RestTemplate();
+        List<SymbolInfoModel> symbolList = new ArrayList<SymbolInfoModel>(
+                Arrays.asList(
+                        restTemplate.getForObject(uri, SymbolInfoModel[].class)
+                ));
+        List<String> symbolsSugestionList = new ArrayList<>();
+        symbolList.forEach(sb -> symbolsSugestionList.add(sb.getDisplaySymbol()));
+
+        return symbolsSugestionList;
+
+    }
 }

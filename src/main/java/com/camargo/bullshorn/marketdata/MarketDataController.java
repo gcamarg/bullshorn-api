@@ -2,6 +2,8 @@ package com.camargo.bullshorn.marketdata;
 
 import com.camargo.bullshorn.marketdata.model.CandleDataModel;
 import com.camargo.bullshorn.marketdata.model.SymbolInfoModel;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -24,6 +26,12 @@ public class MarketDataController {
         return response;
     }
 
+    @GetMapping("/suggestion")
+    private ResponseEntity<List<String>> getSymbolList() {
+
+        List<String> responseList = marketDataService.getSymbolSugestion();
+        return new ResponseEntity<>(responseList, HttpStatus.OK);
+    }
     @GetMapping("/{market}/{resolution}/{symbol}")
     private List<CandleDataModel> getData(@PathVariable("market") String market, @PathVariable("resolution") String resolution,
                                           @PathVariable("symbol") String symbol) {

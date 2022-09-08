@@ -43,7 +43,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/api/v1/registration/**", "/login", "/api/v1/marketdata/**")
+                .antMatchers("/api/v1/registration/**", "/login", "/api/v1/marketdata/**", "/api/v1/news/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated().and()

@@ -23,8 +23,11 @@ public class UserInvestmentsController {
 
     }
     @GetMapping("/")
-    public List<UserInvestments> getInvestments(){
-        return userInvestmentsService.getUserInvestments();
+    public ResponseEntity<List<UserInvestments>> getInvestments(){
+
+        List<UserInvestments> investments = userInvestmentsService.getUserInvestments();
+        return new ResponseEntity<>(investments, HttpStatus.OK);
+
     }
 
     @DeleteMapping("/")
